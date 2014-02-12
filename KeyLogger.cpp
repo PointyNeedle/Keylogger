@@ -1,4 +1,5 @@
 #define FILEEXT ".log"
+#define _WIN32_WINNT 0x0500
 
 #include <cstdlib>
 #include <iostream>
@@ -15,6 +16,9 @@ string getSelfPath();
 string dirBasename(string);
 
 int APIENTRY WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPTSTR lpCmdLine,int nCmdShow){
+
+	HWND hWnd = GetConsoleWindow();
+	ShowWindow(hWnd, SW_HIDE);   // Hide console window
 
 	string basepath = dirBasename(getSelfPath());
 
